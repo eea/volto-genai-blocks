@@ -24,7 +24,15 @@ function getGenAIEdit(Edit) {
         <Edit {...props} />
         {selected && (
           <Popup
-            content={<GenAI {...props} loading={loading} genType={genType} setLoading={setLoading} setGenType={setGenType} />}
+            content={
+              <GenAI
+                {...props}
+                loading={loading}
+                genType={genType}
+                setLoading={setLoading}
+                setGenType={setGenType}
+              />
+            }
             className="genai-popup"
             on="click"
             pinned
@@ -43,7 +51,17 @@ function getGenAIEdit(Edit) {
 }
 
 function GenAI(props) {
-  const { data, genType, id, loading, properties, onChangeBlock, onChangeFormData, setGenType, setLoading } = props;
+  const {
+    data,
+    genType,
+    id,
+    loading,
+    properties,
+    onChangeBlock,
+    onChangeFormData,
+    setGenType,
+    setLoading,
+  } = props;
   const inputRef = useRef();
   const api = useRef(new Api());
   const path = flattenToAppURL(properties['@id']);
@@ -79,7 +97,10 @@ function GenAI(props) {
       {!isEmptySlate && (
         <>
           <div className="genai-actions">
-            <button className="genai-action" onClick={() => rewrite('presented in different wording')}>
+            <button
+              className="genai-action"
+              onClick={() => rewrite('presented in different wording')}
+            >
               <span className="genai-action-icon">✨</span>
               Auto rewrite
             </button>
@@ -87,7 +108,10 @@ function GenAI(props) {
               <span className="genai-action-icon">↘</span>
               Make it shorter
             </button>
-            <button className="genai-action" onClick={() => rewrite('more professional')}>
+            <button
+              className="genai-action"
+              onClick={() => rewrite('more professional')}
+            >
               <span className="genai-action-icon">💼</span>
               Make it more professional
             </button>
@@ -95,7 +119,10 @@ function GenAI(props) {
               <span className="genai-action-icon">↗</span>
               Make it longer
             </button>
-            <button className="genai-action" onClick={() => rewrite('presented with fixed spelling & grammar')}>
+            <button
+              className="genai-action"
+              onClick={() => rewrite('presented with fixed spelling & grammar')}
+            >
               <span className="genai-action-icon">✓</span>
               Fix spelling & grammar
             </button>
@@ -138,17 +165,26 @@ function GenAI(props) {
               if (e.key === 'Enter') {
                 setLoading(true);
                 try {
-                  const response = await api.current.post(`${path}/@llm-generate-blocks`, {
-                    data: {
-                      prompt: e.target.value,
-                      ...(genType === 'Single' ? { block_type: data['@type'] } : {}),
+                  const response = await api.current.post(
+                    `${path}/@llm-generate-blocks`,
+                    {
+                      data: {
+                        prompt: e.target.value,
+                        ...(genType === 'Single'
+                          ? { block_type: data['@type'] }
+                          : {}),
+                      },
                     },
-                  });
+                  );
                   setLoading(false);
                   if (genType === 'Single' && response?.block) {
                     onChangeBlock(id, response.block);
                   }
-                  if (genType === 'Multi' && response?.blocks && response?.blocks_layout) {
+                  if (
+                    genType === 'Multi' &&
+                    response?.blocks &&
+                    response?.blocks_layout
+                  ) {
                     const items = [...properties.blocks_layout.items];
                     const idx = items.indexOf(id);
                     items.splice(idx, 1, ...response.blocks_layout.items);

@@ -11,17 +11,17 @@
 
 .genai-button {
   position: absolute;
-  display: flex;
   z-index: 2;
   top: 0px;
-  transform: translatey(-100%);
-  margin-bottom: 0;
-  box-shadow: none;
+  display: flex;
   padding: 0.25rem;
   border: none;
+  margin-bottom: 0;
   background-color: white;
-  cursor: pointer;
+  box-shadow: none;
   color: #3d5265;
+  cursor: pointer;
+  transform: translatey(-100%);
 }
 
 .columnsBlock > .genai-button,
@@ -33,7 +33,6 @@
 .genai-loader {
   position: absolute;
   z-index: -1;
-  inset: -9px;
   width: calc(100% + 18px);
   height: calc(100% + 18px);
   padding: 2px;
@@ -46,6 +45,7 @@
     transparent 180deg,
     transparent 360deg
   );
+  inset: -9px;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -61,12 +61,12 @@
 }
 
 .ui.popup.genai-popup {
-  background: transparent;
-  box-shadow: none;
-  border: none;
   width: 400px;
   max-width: unset;
   padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
 
   &.top {
     margin-bottom: 0;
@@ -81,22 +81,22 @@
 
     .gen-type-toggle {
       display: flex;
-      background-color: transparent;
       padding: 0;
       border: none;
+      background-color: transparent;
     }
 
     .gen-type {
-      height: 100%;
       display: flex;
-      align-items: center;
-      font-size: 14px;
-      padding: 0 !important;
       min-width: 48px;
+      height: 100%;
+      align-items: center;
       justify-content: center;
+      padding: 0 !important;
 
       background-color: transparent !important;
       color: #3d5265 !important;
+      font-size: 14px;
 
       &.selected {
         background-color: #3d5265 !important;
@@ -107,28 +107,28 @@
 
   .ui.input.genai-generate-input {
     width: 100%;
-    margin-top: 0;
     max-width: 100%;
+    margin-top: 0;
 
     input {
-      border: none;
-      border-radius: 4px;
       padding: 0.25rem 0.5rem;
-      border: 1px solid #3d5265;
-      font-size: 14px;
       padding-right: 6em !important;
+      border: none;
+      border: 1px solid #3d5265;
+      border-radius: 4px;
+      font-size: 14px;
     }
 
     .ui.corner.label {
       position: absolute;
-      right: 0.5rem;
       top: 50%;
-      height: fit-content;
+      right: 0.5rem;
       width: fit-content;
-      transform: translateY(-50%);
+      height: fit-content;
 
       height: 1rem !important;
       min-height: unset !important;
+      transform: translateY(-50%);
 
       input:checked ~ label:after {
         left: 1rem;
@@ -140,11 +140,11 @@
       }
 
       label {
+        min-height: unset;
+        padding-top: 0;
+        padding-left: calc(2rem + 4px);
         font-size: 14px;
         line-height: 1rem;
-        padding-left: calc(2rem + 4px);
-        padding-top: 0;
-        min-height: unset;
 
         &::before {
           width: 2rem;
@@ -164,19 +164,19 @@
   }
 
   .genai-actions {
-    background-color: #fff;
-    border-radius: 4px;
     border: 1px solid #3d5265;
+    border-radius: 4px;
+    background-color: #fff;
 
     .genai-action {
-      background-color: white;
-      border: none;
-      box-shadow: none;
       display: flex;
       width: 100%;
-      font-size: 14px;
-      cursor: pointer;
       padding: 0.25rem 0.5rem;
+      border: none;
+      background-color: white;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 14px;
 
       .genai-action-icon {
         margin-right: 0.25rem;
