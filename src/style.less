@@ -1,0 +1,186 @@
+@import (multiple, reference, optional) '../../theme.config';
+
+@type: extra;
+@element: custom;
+
+@property --angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: '<angle>';
+}
+
+.genai-button {
+  position: absolute;
+  display: flex;
+  z-index: 2;
+  top: 0px;
+  transform: translatey(-100%);
+  margin-bottom: 0;
+  box-shadow: none;
+  padding: 0.25rem;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  color: #3d5265;
+}
+
+.columnsBlock > .genai-button,
+.tabs_block > .genai-button {
+  z-index: 3;
+  right: 0;
+}
+
+.genai-loader {
+  position: absolute;
+  z-index: -1;
+  inset: -9px;
+  width: calc(100% + 18px);
+  height: calc(100% + 18px);
+  padding: 2px;
+  border-radius: 3px;
+  animation: 2s angle-spin linear infinite;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    @secondaryColor 90deg,
+    transparent 180deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+
+  &.loading {
+    opacity: 1;
+  }
+}
+
+.ui.popup.genai-popup {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  width: 400px;
+  max-width: unset;
+  padding: 0;
+
+  &.top {
+    margin-bottom: 0;
+  }
+
+  &::before {
+    display: none;
+  }
+
+  .genai-generate {
+    display: flex;
+
+    .gen-type-toggle {
+      display: flex;
+      background-color: transparent;
+      padding: 0;
+      border: none;
+    }
+
+    .gen-type {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      padding: 0 !important;
+      min-width: 48px;
+      justify-content: center;
+
+      background-color: transparent !important;
+      color: #3d5265 !important;
+
+      &.selected {
+        background-color: #3d5265 !important;
+        color: #fff !important;
+      }
+    }
+  }
+
+  .ui.input.genai-generate-input {
+    width: 100%;
+    margin-top: 0;
+    max-width: 100%;
+
+    input {
+      border: none;
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #3d5265;
+      font-size: 14px;
+      padding-right: 6em !important;
+    }
+
+    .ui.corner.label {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      height: fit-content;
+      width: fit-content;
+      transform: translateY(-50%);
+
+      height: 1rem !important;
+      min-height: unset !important;
+
+      input:checked ~ label:after {
+        left: 1rem;
+      }
+
+      input {
+        width: 2rem;
+        height: 1rem;
+      }
+
+      label {
+        font-size: 14px;
+        line-height: 1rem;
+        padding-left: calc(2rem + 4px);
+        padding-top: 0;
+        min-height: unset;
+
+        &::before {
+          width: 2rem;
+          height: 1rem;
+        }
+
+        &::after {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .genai-actions {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #3d5265;
+
+    .genai-action {
+      background-color: white;
+      border: none;
+      box-shadow: none;
+      display: flex;
+      width: 100%;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+
+      .genai-action-icon {
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}
