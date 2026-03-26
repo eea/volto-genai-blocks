@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import { Input, Popup, Checkbox } from 'semantic-ui-react';
+import config from '@plone/volto/registry';
 import { Api } from '@plone/volto/helpers';
 import { Icon } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -9,7 +10,7 @@ import './style.less';
 
 function getGenAIEdit(Edit) {
   return (props) => {
-    const { selected } = props;
+    const { selected, data } = props;
     const [loading, setLoading] = useState(false);
     const [genType, setGenType] = useState('Single');
 
@@ -19,10 +20,13 @@ function getGenAIEdit(Edit) {
       }
     }, [selected]);
 
+    const isCompatible =
+      config.settings.genai?.compatibleBlocks?.includes(data['@type']) || false;
+
     return (
       <>
         <Edit {...props} />
-        {selected && (
+        {isCompatible && selected && (
           <Popup
             content={
               <GenAI
@@ -56,12 +60,12 @@ function GenAI(props) {
     genType,
     id,
     loading,
-    properties,
     onChangeBlock,
     onChangeFormData,
     setGenType,
     setLoading,
   } = props;
+  const properties = props.metadata || props.properties;
   const inputRef = useRef();
   const api = useRef(new Api());
   const path = flattenToAppURL(properties['@id']);

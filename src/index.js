@@ -7,6 +7,9 @@ const applyConfig = (config) => {
       edit: getGenAIEdit(config.blocks.blocksConfig[id].edit),
     };
   });
+  config.settings.genai = {
+    compatibleBlocks: ['slate', 'tabs_block', 'columnsBlock'],
+  };
   return config;
 };
 
