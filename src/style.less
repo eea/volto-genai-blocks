@@ -78,8 +78,8 @@
 
   textarea {
     width: 100%;
-    max-width: 100%;
     min-width: 100%;
+    max-width: 100%;
     padding: 0.25rem;
   }
 
@@ -102,10 +102,10 @@
       align-items: center;
       padding: 0.5rem 0.75rem;
       border-bottom: 1px solid @lightGreyBorderColor;
-      gap: 0.4rem;
       color: @primaryColor;
       font-size: 13px;
       font-weight: 600;
+      gap: 0.4rem;
 
       .genai-close {
         display: flex;
@@ -123,8 +123,8 @@
         line-height: 1;
 
         &:hover {
-          background-color: @lightGreyBorderColor;
           border-radius: 50%;
+          background-color: @lightGreyBorderColor;
           color: @primaryColor;
         }
       }
@@ -133,14 +133,14 @@
     .genai-card-body {
       display: flex;
       overflow: auto;
+      min-height: 0;
       flex: 1 1 auto;
       flex-direction: column;
-      min-height: 0;
     }
 
     .genai-card-divider {
-      flex-shrink: 0;
       height: 1px;
+      flex-shrink: 0;
       background-color: @lightGreyBorderColor;
     }
 
@@ -167,13 +167,13 @@
   .genai-prompt {
     position: relative;
     display: flex;
+    min-height: 60px;
     flex: 1 1 auto;
     flex-direction: column;
-    min-height: 60px;
 
     textarea {
-      flex: 1 1 auto;
       min-height: 60px;
+      flex: 1 1 auto;
       padding: 0.5rem 2.5rem 0.5rem 0.75rem;
       border: none;
       background: transparent;
@@ -182,8 +182,8 @@
 
       &:focus {
         border: none;
-        outline: none;
         box-shadow: none;
+        outline: none;
       }
     }
 
@@ -203,7 +203,9 @@
       color: @white;
       cursor: pointer;
       font-size: 12px;
-      transition: background-color 0.15s ease, opacity 0.15s ease;
+      transition:
+        background-color 0.15s ease,
+        opacity 0.15s ease;
 
       &:hover:not(:disabled) {
         background-color: @secondaryColorHover;
@@ -218,15 +220,15 @@
 
   .genai-actions {
     display: flex;
-    flex-shrink: 0;
     flex-direction: column;
+    flex-shrink: 0;
     padding: 0.25rem 0;
     background-color: @white;
 
     .genai-action {
       display: flex;
-      align-items: center;
       width: 100%;
+      align-items: center;
       padding: 0.4rem 0.75rem;
       border: none;
       background-color: transparent;
