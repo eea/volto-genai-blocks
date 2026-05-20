@@ -1,4 +1,5 @@
 import getGenAIEdit from './GenAIEdit';
+import LLMSummaryWidget from './LLMSummaryWidget';
 
 const applyConfig = (config) => {
   Object.keys(config.blocks.blocksConfig).forEach((id) => {
@@ -10,6 +11,7 @@ const applyConfig = (config) => {
   config.settings.genai = {
     compatibleBlocks: ['slate', 'tabs_block', 'columnsBlock'],
   };
+  config.widgets.id.llm_summary = LLMSummaryWidget;
   return config;
 };
 

@@ -1,12 +1,48 @@
-import { useEffect, useRef, useState } from 'react';
-import cx from 'classnames';
-import { Popup, Checkbox, TextArea } from 'semantic-ui-react';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import Api from '@plone/volto/helpers/Api/Api';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import config from '@plone/volto/registry';
-import { Api } from '@plone/volto/helpers';
-import { Icon } from '@plone/volto/components';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import cx from 'classnames';
+import { useEffect, useRef, useState } from 'react';
+import { defineMessages, useIntl } from 'react-intl';
+import { Checkbox, Popup, TextArea } from 'semantic-ui-react';
 import genaiSVG from './icons/genai.svg';
 import './style.less';
+
+const messages = defineMessages({
+  close: { id: 'Close', defaultMessage: 'Close' },
+  submit: { id: 'Submit', defaultMessage: 'Submit' },
+  rewriteTitle: { id: 'Rewrite with AI', defaultMessage: 'Rewrite with AI' },
+  autoRewrite: { id: 'Auto rewrite', defaultMessage: 'Auto rewrite' },
+  makeShorter: { id: 'Make it shorter', defaultMessage: 'Make it shorter' },
+  makeProfessional: {
+    id: 'Make it more professional',
+    defaultMessage: 'Make it more professional',
+  },
+  makeLonger: { id: 'Make it longer', defaultMessage: 'Make it longer' },
+  fixSpelling: {
+    id: 'Fix spelling & grammar',
+    defaultMessage: 'Fix spelling & grammar',
+  },
+  rewritePlaceholder: {
+    id: 'Make it to be...',
+    defaultMessage: 'Make it to be...',
+  },
+  generateTitle: { id: 'Generate with AI', defaultMessage: 'Generate with AI' },
+  multipleBlocks: { id: 'Multiple blocks', defaultMessage: 'Multiple blocks' },
+  multiHelp: {
+    id: 'Generate several blocks at once',
+    defaultMessage: 'Generate several blocks at once',
+  },
+  singleHelp: {
+    id: 'Replace this block',
+    defaultMessage: 'Replace this block',
+  },
+  generatePlaceholder: {
+    id: 'Describe what to generate...',
+    defaultMessage: 'Describe what to generate...',
+  },
+});
 
 function getGenAIEdit(Edit) {
   return (props) => {
@@ -34,6 +70,7 @@ function getGenAIEdit(Edit) {
       <>
         <Edit {...props} />
         <button
+          type="button"
           ref={contextRef}
           disabled={loading}
           onClick={() => setOpen(!open)}
@@ -65,6 +102,8 @@ function getGenAIEdit(Edit) {
 }
 
 function GenAICard({ title, onClose, children, footer }) {
+  const intl = useIntl();
+  const closeLabel = intl.formatMessage(messages.close);
   return (
     <div className="genai-card">
       <div className="genai-card-header">
@@ -73,8 +112,8 @@ function GenAICard({ title, onClose, children, footer }) {
         <button
           className="genai-close"
           onClick={onClose}
-          title="Close"
-          aria-label="Close"
+          title={closeLabel}
+          aria-label={closeLabel}
           type="button"
         >
           ×
@@ -87,6 +126,8 @@ function GenAICard({ title, onClose, children, footer }) {
 }
 
 function PromptInput({ inputRef, value, onChange, onSubmit, placeholder }) {
+  const intl = useIntl();
+  const submitLabel = intl.formatMessage(messages.submit);
   return (
     <div className="genai-prompt">
       <TextArea
@@ -105,8 +146,8 @@ function PromptInput({ inputRef, value, onChange, onSubmit, placeholder }) {
         className="genai-submit"
         onClick={onSubmit}
         disabled={!value.trim()}
-        title="Submit"
-        aria-label="Submit"
+        title={submitLabel}
+        aria-label={submitLabel}
         type="button"
       >
         ➤
@@ -124,7 +165,7 @@ function GenAI(props) {
   const isEmptySlate = data['@type'] === 'slate' && !data['plaintext'];
 
   useEffect(() => {
-    inputRef.current?.ref.current?.focus({ preventScroll: true });
+    inputRef.current?.ref?.current?.focus?.({ preventScroll: true });
   }, []);
 
   const Component = isEmptySlate ? GenAIGenerate : GenAIRewrite;
@@ -157,6 +198,7 @@ function GenAIRewrite(props) {
     api,
     path,
   } = props;
+  const intl = useIntl();
   const [prompt, setPrompt] = useState('');
 
   async function rewrite(style) {
@@ -179,25 +221,36 @@ function GenAIRewrite(props) {
   const actions = [
     {
       icon: '✨',
-      label: 'Auto rewrite',
+      label: intl.formatMessage(messages.autoRewrite),
       style: 'presented in different wording',
     },
-    { icon: '↘', label: 'Make it shorter', style: 'shorter' },
+    {
+      icon: '↘',
+      label: intl.formatMessage(messages.makeShorter),
+      style: 'shorter',
+    },
     {
       icon: '💼',
-      label: 'Make it more professional',
+      label: intl.formatMessage(messages.makeProfessional),
       style: 'more professional',
     },
-    { icon: '↗', label: 'Make it longer', style: 'longer' },
+    {
+      icon: '↗',
+      label: intl.formatMessage(messages.makeLonger),
+      style: 'longer',
+    },
     {
       icon: '✓',
-      label: 'Fix spelling & grammar',
+      label: intl.formatMessage(messages.fixSpelling),
       style: 'presented with fixed spelling & grammar',
     },
   ];
 
   return (
-    <GenAICard title="Rewrite with AI" onClose={() => setOpen(false)}>
+    <GenAICard
+      title={intl.formatMessage(messages.rewriteTitle)}
+      onClose={() => setOpen(false)}
+    >
       <div className="genai-actions">
         {actions.map((a) => (
           <button
@@ -217,7 +270,7 @@ function GenAIRewrite(props) {
         value={prompt}
         onChange={setPrompt}
         onSubmit={() => rewrite(prompt.trim())}
-        placeholder="Make it to be..."
+        placeholder={intl.formatMessage(messages.rewritePlaceholder)}
       />
     </GenAICard>
   );
@@ -237,6 +290,7 @@ function GenAIGenerate(props) {
     api,
     path,
   } = props;
+  const intl = useIntl();
   const properties = props.metadata || props.properties;
   const [prompt, setPrompt] = useState('');
 
@@ -279,13 +333,13 @@ function GenAIGenerate(props) {
 
   return (
     <GenAICard
-      title="Generate with AI"
+      title={intl.formatMessage(messages.generateTitle)}
       onClose={() => setOpen(false)}
       footer={
         <>
           <Checkbox
             checked={genType === 'Multi'}
-            label="Multiple blocks"
+            label={intl.formatMessage(messages.multipleBlocks)}
             onClick={() =>
               setGenType(genType === 'Single' ? 'Multi' : 'Single')
             }
@@ -293,8 +347,8 @@ function GenAIGenerate(props) {
           />
           <span className="genai-help">
             {genType === 'Multi'
-              ? 'Generate several blocks at once'
-              : 'Replace this block'}
+              ? intl.formatMessage(messages.multiHelp)
+              : intl.formatMessage(messages.singleHelp)}
           </span>
         </>
       }
@@ -304,7 +358,7 @@ function GenAIGenerate(props) {
         value={prompt}
         onChange={setPrompt}
         onSubmit={submit}
-        placeholder="Describe what to generate..."
+        placeholder={intl.formatMessage(messages.generatePlaceholder)}
       />
     </GenAICard>
   );

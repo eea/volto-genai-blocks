@@ -11,27 +11,117 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. Default: "Back"
-#: Controlpanels/PlotlyControlPanel
-msgid "Back"
+#. Default: "AI summary generated"
+#: LLMSummaryWidget
+msgid "AI summary generated"
+msgstr ""
+
+#. Default: "Auto rewrite"
+#: GenAIEdit
+msgid "Auto rewrite"
 msgstr ""
 
 #. Default: "Cancel"
-#: Controlpanels/PlotlyControlPanel
+#: LLMSummaryWidget
 msgid "Cancel"
 msgstr ""
 
-#. Default: "Changes saved."
-#: Controlpanels/PlotlyControlPanel
-msgid "Changes saved."
+#. Default: "Close"
+#: GenAIEdit
+msgid "Close"
 msgstr ""
 
-#. Default: "Info"
-#: Controlpanels/PlotlyControlPanel
-msgid "Info"
+#. Default: "Describe what to generate..."
+#: GenAIEdit
+msgid "Describe what to generate..."
 msgstr ""
 
-#. Default: "Save"
-#: Controlpanels/PlotlyControlPanel
-msgid "Save"
+#. Default: "Empty summary returned"
+#: LLMSummaryWidget
+msgid "Empty summary returned"
+msgstr ""
+
+#. Default: "Fix spelling & grammar"
+#: GenAIEdit
+msgid "Fix spelling & grammar"
+msgstr ""
+
+#. Default: "Generate AI summary"
+#: LLMSummaryWidget
+msgid "Generate AI summary"
+msgstr ""
+
+#. Default: "Generate several blocks at once"
+#: GenAIEdit
+msgid "Generate several blocks at once"
+msgstr ""
+
+#. Default: "Generate with AI"
+#: GenAIEdit
+msgid "Generate with AI"
+msgstr ""
+
+#. Default: "Make it longer"
+#: GenAIEdit
+msgid "Make it longer"
+msgstr ""
+
+#. Default: "Make it more professional"
+#: GenAIEdit
+msgid "Make it more professional"
+msgstr ""
+
+#. Default: "Make it shorter"
+#: GenAIEdit
+msgid "Make it shorter"
+msgstr ""
+
+#. Default: "Make it to be..."
+#: GenAIEdit
+msgid "Make it to be..."
+msgstr ""
+
+#. Default: "Manual edits welcome. Regenerating overwrites current text."
+#: LLMSummaryWidget
+msgid "Manual edits welcome. Regenerating overwrites current text."
+msgstr ""
+
+#. Default: "Multiple blocks"
+#: GenAIEdit
+msgid "Multiple blocks"
+msgstr ""
+
+#. Default: "Regenerate"
+#: LLMSummaryWidget
+msgid "Regenerate"
+msgstr ""
+
+#. Default: "Regenerate AI summary?"
+#: LLMSummaryWidget
+msgid "Regenerate AI summary?"
+msgstr ""
+
+#. Default: "Replace this block"
+#: GenAIEdit
+msgid "Replace this block"
+msgstr ""
+
+#. Default: "Rewrite with AI"
+#: GenAIEdit
+msgid "Rewrite with AI"
+msgstr ""
+
+#. Default: "Submit"
+#: GenAIEdit
+msgid "Submit"
+msgstr ""
+
+#. Default: "Summary generation failed: {error}"
+#: LLMSummaryWidget
+msgid "Summary generation failed: {error}"
+msgstr ""
+
+#. Default: "This will overwrite the current summary with a freshly generated one."
+#: LLMSummaryWidget
+msgid "This will overwrite the current summary with a freshly generated one."
 msgstr ""
