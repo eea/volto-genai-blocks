@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-genai-blocks",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Volto addon for AI-powered block generation and rewriting",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
-    "@plone/scripts": "*",
+    "@plone/scripts": "^3.10.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "cypress": "13.1.0",
     "dotenv": "^16.3.2",
