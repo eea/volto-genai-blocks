@@ -9,6 +9,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { toast } from 'react-toastify';
+import Toast from '@plone/volto/components/manage/Toast/Toast';
 
 import LLMSummaryWidget from './LLMSummaryWidget';
 
@@ -113,6 +114,13 @@ describe('LLMSummaryWidget', () => {
       expect(onChange).toHaveBeenCalledWith('llm_summary', 'A fresh summary'),
     );
     expect(toast.success).toHaveBeenCalled();
+    const [notification] = toast.success.mock.calls[0];
+    expect(notification.type).toBe(Toast);
+    expect(notification.props).toMatchObject({
+      success: true,
+      title: 'Success',
+      content: 'AI summary generated',
+    });
   });
 
   it('warns when the backend returns an empty summary', async () => {
@@ -124,6 +132,13 @@ describe('LLMSummaryWidget', () => {
     });
 
     await waitFor(() => expect(toast.warn).toHaveBeenCalled());
+    const [notification] = toast.warn.mock.calls[0];
+    expect(notification.type).toBe(Toast);
+    expect(notification.props).toMatchObject({
+      warning: true,
+      title: 'Warning',
+      content: 'Empty summary returned',
+    });
     expect(onChange).not.toHaveBeenCalled();
   });
 
@@ -136,6 +151,13 @@ describe('LLMSummaryWidget', () => {
     });
 
     await waitFor(() => expect(toast.error).toHaveBeenCalled());
+    const [notification] = toast.error.mock.calls[0];
+    expect(notification.type).toBe(Toast);
+    expect(notification.props).toMatchObject({
+      error: true,
+      title: 'Error',
+      content: 'Summary generation failed: boom',
+    });
   });
 
   it('asks for confirmation before overwriting an existing summary', async () => {
