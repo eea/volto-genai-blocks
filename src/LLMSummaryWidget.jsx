@@ -1,4 +1,5 @@
 import Icon from '@plone/volto/components/theme/Icon/Icon';
+import Toast from '@plone/volto/components/manage/Toast/Toast';
 import TextareaWidget from '@plone/volto/components/manage/Widgets/TextareaWidget';
 import Api from '@plone/volto/helpers/Api/Api';
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
@@ -10,6 +11,9 @@ import { Button, Confirm } from 'semantic-ui-react';
 import genaiSVG from './icons/genai.svg';
 
 const messages = defineMessages({
+  success: { id: 'Success', defaultMessage: 'Success' },
+  warning: { id: 'Warning', defaultMessage: 'Warning' },
+  error: { id: 'Error', defaultMessage: 'Error' },
   generated: {
     id: 'AI summary generated',
     defaultMessage: 'AI summary generated',
@@ -67,13 +71,31 @@ const LLMSummaryWidget = (props) => {
       const summary = response?.llm_summary;
       if (summary?.trim()) {
         onChange(id, summary);
-        toast.success(intl.formatMessage(messages.generated));
+        toast.success(
+          <Toast
+            success
+            title={intl.formatMessage(messages.success)}
+            content={intl.formatMessage(messages.generated)}
+          />,
+        );
       } else {
-        toast.warn(intl.formatMessage(messages.empty));
+        toast.warn(
+          <Toast
+            warning
+            title={intl.formatMessage(messages.warning)}
+            content={intl.formatMessage(messages.empty)}
+          />,
+        );
       }
     } catch (err) {
       toast.error(
-        intl.formatMessage(messages.failed, { error: err?.message || err }),
+        <Toast
+          error
+          title={intl.formatMessage(messages.error)}
+          content={intl.formatMessage(messages.failed, {
+            error: err?.message || err,
+          })}
+        />,
       );
     } finally {
       setLoading(false);

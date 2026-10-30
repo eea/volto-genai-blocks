@@ -41,6 +41,11 @@ msgstr ""
 msgid "Empty summary returned"
 msgstr ""
 
+#. Default: "Error"
+#: LLMSummaryWidget
+msgid "Error"
+msgstr ""
+
 #. Default: "Fix spelling & grammar"
 #: GenAIEdit
 msgid "Fix spelling & grammar"
@@ -116,6 +121,11 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#. Default: "Success"
+#: LLMSummaryWidget
+msgid "Success"
+msgstr ""
+
 #. Default: "Summary generation failed: {error}"
 #: LLMSummaryWidget
 msgid "Summary generation failed: {error}"
@@ -124,4 +134,9 @@ msgstr ""
 #. Default: "This will overwrite the current summary with a freshly generated one."
 #: LLMSummaryWidget
 msgid "This will overwrite the current summary with a freshly generated one."
+msgstr ""
+
+#. Default: "Warning"
+#: LLMSummaryWidget
+msgid "Warning"
 msgstr ""
